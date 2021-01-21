@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@model MTBLogger.Models.User
+
+<h1>Login</h1>
+
+<form method="post" asp-action="Login">
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input class="form-control" placeholder="Enter Email" asp-for="Email" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input type="password" class="form-control" placeholder="Enter Password" asp-for="Password" />
+    </div>
+
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary w-100" value="Login" />
+    </div>
+</form>

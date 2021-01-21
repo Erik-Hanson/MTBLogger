@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,20 @@ namespace MTBLogger
             options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            /*
+            services.AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            */
+
+            //MvcOptions ops = new MvcOptions();
+            //ops.EnableEndpointRouting = false;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,12 +66,23 @@ namespace MTBLogger
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            /*
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                   name: "default",
+                   template: "{controller=Home}/{action=Index}/{id?}");
+            });
+            */
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Registration";
 }
 
 @model MTBLogger.Models.User
@@ -10,17 +10,24 @@
     <div class="form-group">
         <label asp-for="FirstName"></label>
         <input class="form-control" placeholder="Enter First Name" asp-for="FirstName" />
+    </div>
 
+    <div class="form-group">
         <label asp-for="LastName"></label>
         <input class="form-control" placeholder="Enter Last Name" asp-for="LastName" />
+    </div>
 
+    <div class="form-group">
         <label asp-for="Email"></label>
         <input class="form-control" placeholder="Enter Email" asp-for="Email" />
+    </div>
 
+    <div class="form-group">
         <label asp-for="Password"></label>
         <input type="password" class="form-control" placeholder="Enter Password" asp-for="Password" />
-        <div class="text-center">
-            <input type="submit" class="btn btn-primary w-100" value="Register" />
-        </div>
+    </div>
+
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary w-100" value="Register" />
     </div>
 </form>
