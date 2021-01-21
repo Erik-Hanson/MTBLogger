@@ -36,14 +36,6 @@ namespace MTBLogger
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-
-            /*
-            services.AddMvc()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            */
-
-            //MvcOptions ops = new MvcOptions();
-            //ops.EnableEndpointRouting = false;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,15 +66,6 @@ namespace MTBLogger
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            /*
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                   name: "default",
-                   template: "{controller=Home}/{action=Index}/{id?}");
-            });
-            */
         }
     }
 }
