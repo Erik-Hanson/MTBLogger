@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MTBLogger.Data;
 using MTBLogger.Models;
 using System;
 using System.Collections.Generic;
@@ -12,15 +14,23 @@ namespace MTBLogger.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
         public IActionResult Index()
         {
-            return View();
+            if (HttpContext.Session.GetString("FullName") != null) {
+                IEnumerable<Logged> obj = _db.Logged.Where(s => s.UserId.Equals(HttpContext.Session.GetInt32("UserId")));
+                return View(obj);
+            } else
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()

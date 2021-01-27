@@ -16,5 +16,6 @@ namespace MTBLogger.Data
         }
 
         public DbSet<User> User { get; set; }
+        public DbSet<Logged> Logged { get; set; }
     }
 }
