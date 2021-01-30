@@ -34,8 +34,6 @@ namespace MTBLogger.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Log(Logged obj)
         {
-            Console.WriteLine(HttpContext.Session.GetInt32("UserId"));
-
             if (ModelState.IsValid)
             {
                 obj.UserId = HttpContext.Session.GetInt32("UserId");

@@ -3,16 +3,26 @@
 }
 
 @using Microsoft.AspNetCore.Http
-@model Tuple<IEnumerable<MTBLogger.Models.Logged>>;
+@model Tuple<IEnumerable<MTBLogger.Models.Logged>, IEnumerable<MTBLogger.Models.ToRide>>;
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    @if (Context.Session.GetString("FullName") != null)
+    {
+        <h1 class="display-4">Welcome @Context.Session.GetString("FullName")</h1>
+    }
+    else
+    {
+        <h1 class="display-4">Welcome</h1>
+    }
+
     <div class="card-body">
         @if (Context.Session.GetString("FullName") != null)
         {
+            <!--
             <p>Name: @Context.Session.GetString("FullName")</p>
             <p>Email: @Context.Session.GetString("Email")</p>
             <p>UserId: @Context.Session.GetInt32("UserId")</p>
+            -->
             @if (Model.Item1.Count() > 0)
             {
                 <h3 class="display-4 py-2">Logged Trails</h3>
@@ -37,7 +47,7 @@
                                 <td class="text-center">
                                     <div class="w-75 btn-group" role="group">
                                         <a asp-controller="Logged" asp-route-id="@obj.LogId" asp-action="Edit" class="btn btn-primary mx-2">
-                                           Edit
+                                            Edit
                                         </a>
                                         <a asp-controller="Logged" asp-route-id="@obj.LogId" asp-action="Delete" class="btn btn-danger mx-2">
                                             Delete
@@ -48,6 +58,47 @@
                         }
                     </tbody>
                 </table>
+            }
+            else
+            {
+                <p>You have no logged trails</p>
+            }
+
+            @if (Model.Item2.Count() > 0)
+            {
+                <h3 class="display-4 py-2">Trails To Ride</h3>
+                <table class="table table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                Trail Name
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var obj in Model.Item2)
+                        {
+                            <tr>
+                                <td width="50%">@obj.TrailName</td>
+                                <td class="text-center">
+                                    <div class="w-75 btn-group" role="group">
+                                        <a asp-controller="ToRide" asp-route-id="@obj.LogId" asp-action="Edit" class="btn btn-primary mx-2">
+                                            Edit
+                                        </a>
+                                        <a asp-controller="ToRide" asp-route-id="@obj.LogId" asp-action="Delete" class="btn btn-danger mx-2">
+                                            Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>You have no trails you want to ride</p>
             }
         }
         else
