@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Log";
+}
+
+@model MTBLogger.Models.Logged
+
+<form method="post" asp-action="Log">
+    <div class="border p-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Log a trail</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="TrailName"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="TrailName" class="form-control" />
+                        <span asp-validation-for="TrailName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Description"></label>
+                    </div>
+                    <div class="col-8">
+                        <textarea asp-for="Description" class="form-control" rows="6"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-100" value="Log" />
+                        </div>
+                        <div class="col">
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-success">Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{ <partial name="_ValidationScriptsPartial" /> }
+}
