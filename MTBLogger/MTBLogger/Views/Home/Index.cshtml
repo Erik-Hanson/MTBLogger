@@ -3,18 +3,17 @@
 }
 
 @using Microsoft.AspNetCore.Http
-@model IEnumerable<MTBLogger.Models.Logged>;
+@model Tuple<IEnumerable<MTBLogger.Models.Logged>>;
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <div class="card-body">
         @if (Context.Session.GetString("FullName") != null)
         {
             <p>Name: @Context.Session.GetString("FullName")</p>
             <p>Email: @Context.Session.GetString("Email")</p>
             <p>UserId: @Context.Session.GetInt32("UserId")</p>
-            @if (Model.Count() > 0)
+            @if (Model.Item1.Count() > 0)
             {
                 <h3 class="display-4 py-2">Logged Trails</h3>
                 <table class="table table-bordered table-striped" style="width:100%">
@@ -30,17 +29,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var obj in Model)
+                        @foreach (var obj in Model.Item1)
                         {
                             <tr>
                                 <td width="20%">@obj.TrailName</td>
                                 <td width="55%">@obj.Description</td>
                                 <td class="text-center">
                                     <div class="w-75 btn-group" role="group">
-                                        <a asp-controller="Category" asp-route-Id="@obj.LogId" asp-action="Edit" class="btn btn-primary mx-2">
+                                        <a asp-controller="Logged" asp-route-id="@obj.LogId" asp-action="Edit" class="btn btn-primary mx-2">
                                            Edit
                                         </a>
-                                        <a asp-controller="Category" asp-route-Id="@obj.LogId" asp-action="Delete" class="btn btn-danger mx-2">
+                                        <a asp-controller="Logged" asp-route-id="@obj.LogId" asp-action="Delete" class="btn btn-danger mx-2">
                                             Delete
                                         </a>
                                     </div>

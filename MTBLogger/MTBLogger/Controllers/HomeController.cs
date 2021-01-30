@@ -26,7 +26,8 @@ namespace MTBLogger.Controllers
         {
             if (HttpContext.Session.GetString("FullName") != null) {
                 IEnumerable<Logged> obj = _db.Logged.Where(s => s.UserId.Equals(HttpContext.Session.GetInt32("UserId")));
-                return View(obj);
+                Tuple<IEnumerable<Logged>> tupy = new Tuple<IEnumerable<Logged>>(obj);
+                return View(tupy);
             } else
             {
                 return View();

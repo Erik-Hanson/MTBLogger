@@ -45,5 +45,73 @@ namespace MTBLogger.Controllers
             }
             return View(obj);
         }
+
+        // GET - Edit
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _db.Logged.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        // POST - Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Logged obj)
+        {
+            if (ModelState.IsValid)
+            {
+                obj.UserId = HttpContext.Session.GetInt32("UserId");
+                _db.Logged.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(obj);
+        }
+
+        // GET - Delete
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _db.Logged.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        // POST - Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(Logged obj)
+        {
+            //var obj = _db.Logged.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _db.Logged.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
