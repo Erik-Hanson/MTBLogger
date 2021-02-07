@@ -39,7 +39,7 @@ namespace MTBLogger.Controllers
                 obj.UserId = HttpContext.Session.GetInt32("UserId");
                 _db.ToRide.Add(obj);
                 _db.SaveChanges();
-                return RedirectToAction("Create");
+                return RedirectToAction("Index", "Home");
             }
             return View(obj);
         } 
