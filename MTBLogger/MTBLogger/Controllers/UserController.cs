@@ -73,8 +73,8 @@ namespace MTBLogger.Controllers
                 } 
                 else
                 {
-                    ViewBag.error = "Login failed";
-                    return RedirectToAction("Login");
+                    ModelState.AddModelError("Email", "Incorrect login credentials/account does not exist");
+                    return View();
                 }
             }
             return View();

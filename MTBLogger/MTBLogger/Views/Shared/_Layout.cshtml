@@ -8,6 +8,7 @@
     <title>@ViewData["Title"] - MTBLogger</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/fontawesome/css/all.css" />
 </head>
 <body>
     <header>
@@ -46,7 +47,7 @@
                     @if (Context.Session.GetString("FullName") != null)
                     {
                         <form class="form-inline" method="get" asp-controller="User" asp-action="Logout">
-                            <button type="submit" class="btn btn-danger">Logout</button>
+                            <button type="submit" class="btn btn-danger">Logout <i class="fas fa-sign-out-alt"></i></button>
                         </form>
                     }
                 </div>
